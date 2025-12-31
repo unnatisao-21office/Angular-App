@@ -40,7 +40,9 @@
   </div>
 
   <div class="col-span-4">
-    <div [class]="myClassName">Div</div>
+    <div [class]="myClassName">
+      <input type="text" [(ngModel)]="courseName" />
+    </div>
   </div>
 
   <div class="col-span-4">
@@ -75,11 +77,12 @@
   </div>
   <div>
     <div class="col-3">
-      <select (change)="onCityChange($event)" class="border-4 border-gray-400 rounded-lg p-2">
+      <select [(ngModel)]="selectcityname"(change)="onCityChange($event)" class="border-4 border-gray-400 rounded-lg p-2">
       <option value="india">india</option>
       <option value="Nepal">Nepal</option>
       <option value="Bhutan">Bhutan</option>
       </select>
     </div>
+    <div><div class="col-3">City: {{ selectcityname }}</div></div>
   </div>
 </div>
