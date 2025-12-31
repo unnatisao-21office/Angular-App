@@ -1,17 +1,85 @@
-<div class="row grid grid-cols-12 gap-4 p-4 bg-gray-200 m-2 border-4 border-gray-400 justify-center items-center ">
-  
-  <div class="col-3 gap-2 bg-gray-500 p-9 m-2 font-bold justify-center  items-center flex border-4 border-gray-600">
+
+<div
+  class="grid grid-cols-12 gap-4 p-4 bg-gray-200 m-2 border-4 border-gray-400 rounded-lg"
+>
+  <div
+    class="col-span-4 bg-gray-500 p-6 font-bold flex justify-center items-center border-4 border-gray-600 rounded-xl"
+  >
     Course Name:
-    <span class="font-bold">{{ courseName }}</span>
+    <span class="ml-2">{{ courseName }}</span>
   </div>
 
-  <div class="col-3 bg-gray-500 p-9 m-2 font-bold justify-center items-center flex border-4 border-gray-600">
+  <div
+    class="col-span-4 bg-gray-500 p-6 font-bold flex justify-center items-center border-4 border-gray-600 rounded-xl"
+  >
     Duration: {{ courseDuration }}
   </div>
 
-  <div class="col-3 bg-gray-500 p-9 m-2 font-bold justify-center items-center flex border-4 border-gray-600">
+  <div
+    class="col-span-4 bg-gray-500 p-6 font-bold flex justify-center items-center border-4 border-gray-600 rounded-xl"
+  >
     Status:
-    <label>{{ isActive }}</label>
+    <span class="ml-2">{{ isActive }}</span>
+  </div>
+</div>
+
+<br />
+
+
+<div
+  class="grid grid-cols-12 gap-4 p-4 bg-gray-200 m-2 border-4 border-gray-400 rounded-lg"
+>
+  <div
+    class="col-span-4 bg-gray-500 p-6 flex justify-center items-center border-4 border-gray-600 rounded-xl"
+  >
+    <input
+      type="text"
+      [value]="courseName"
+      class="p-2 rounded"
+    />
   </div>
 
+  <div class="col-span-4">
+    <div [class]="myClassName">Div</div>
+  </div>
+
+  <div class="col-span-4">
+    <input [type]="myInputType" class="p-2 rounded" />
+  </div>
+</div>
+
+<br />
+
+
+<div class="grid grid-cols-12 gap-4 m-2">
+  <div class="col-span-4">
+    <button class="btn btn-success" (click)="showAlert()">
+      Show Alert
+    </button>
+  </div>
+
+  <div class="col-span-8 space-x-2">
+    <button
+      class="btn btn-success"
+      (click)="changeCourseName('React-js')"
+    >
+      Set React
+    </button>
+
+    <button
+      class="btn btn-success"
+      (click)="changeCourseName('Dot-net')"
+    >
+      Set Dot-Net
+    </button>
+  </div>
+  <div>
+    <div class="col-3">
+      <select (change)="onCityChange($event)" class="border-4 border-gray-400 rounded-lg p-2">
+      <option value="india">india</option>
+      <option value="Nepal">Nepal</option>
+      <option value="Bhutan">Bhutan</option>
+      </select>
+    </div>
+  </div>
 </div>
