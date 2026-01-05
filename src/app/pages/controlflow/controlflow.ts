@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, signal } from '@angular/core';
 
 @Component({
   selector: 'app-controlflow',
@@ -8,5 +8,19 @@ import { Component } from '@angular/core';
   standalone: true 
 })
 export class Controlflow {
+
+  isText: boolean = true;
+
+  isTextVisiable = signal<boolean>(false);
+
+  hideText() {
+    this.isTextVisiable.set(false);
+  }
+
+  showText() {
+    this.isTextVisiable.set(true);
+  }
+
+  cityList: string[] = ['New York', 'Los Angeles', 'Chicago', 'Houston', 'Phoenix'];
 
 }
