@@ -20,20 +20,22 @@
               </tr>
             </thead>
             <tbody>
-                @for (item of employeeList ; track $index){
-                   <tr>
-                <td>{{$index + 1}}</td>
-                <td>{{item.fullName}}</td>
-                <td>{{item.email}}</td>
-                <td>{{item.phone}}</td>
-                <td>{{item.departmentId}}</td>
-                <td>{{item.salary}}</td>
+              @for (item of employeeList
+              () ; track $index){
+              <tr>
+                <td>{{ $index + 1 }}</td>
+                <td>{{ item.fullName }}</td>
+                <td>{{ item.email }}</td>
+                <td>{{ item.phone }}</td>
+                <td>{{ item.departmentId }}</td>
+                <td>{{ item.salary }}</td>
                 <td>
-                  <button class="btn btn-sm btn-warning me-2">Edit</button>
+                  <button class="btn btn-sm btn-warning me-2" (click)="onEdit(item.employeeId)">Edit</button>
                   <button class="btn btn-sm btn-danger">Delete</button>
+                </td>
               </tr>
-                }
-               
+
+              }
             </tbody>
           </table>
         </div>
@@ -51,17 +53,32 @@
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label class="form-label">Full Name</label>
-                <input type="text" [(ngModel)]="employeeobj.fullName" class="form-control" name="fullName" />
+                <input
+                  type="text"
+                  [(ngModel)]="employeeobj.fullName"
+                  class="form-control"
+                  name="fullName"
+                />
               </div>
 
               <div class="col-md-6 mb-3">
                 <label class="form-label">Email</label>
-                <input type="email" [(ngModel)]="employeeobj.email" class="form-control" name="email" />
+                <input
+                  type="email"
+                  [(ngModel)]="employeeobj.email"
+                  class="form-control"
+                  name="email"
+                />
               </div>
 
               <div class="col-md-6 mb-3">
                 <label class="form-label">Phone</label>
-                <input type="text" [(ngModel)]="employeeobj.phone" class="form-control" name="phone" />
+                <input
+                  type="text"
+                  [(ngModel)]="employeeobj.phone"
+                  class="form-control"
+                  name="phone"
+                />
               </div>
 
               <div class="col-md-6 mb-3">
@@ -76,32 +93,50 @@
 
               <div class="col-md-6 mb-3">
                 <label class="form-label">Date of Joining</label>
-                <input type="date" [(ngModel)]="employeeobj.dateOfJoining" class="form-control" name="dateOfJoining" />
+                <input
+                  type="date"
+                  [(ngModel)]="employeeobj.dateOfJoining"
+                  class="form-control"
+                  name="dateOfJoining"
+                />
               </div>
 
               <div class="col-md-6 mb-3">
                 <label class="form-label">Department</label>
-                <select class="form-select" [(ngModel)]="employeeobj.departmentId" name="departmentId">
-                  <option selected>Select Department</option>
-                  <option>1</option>
-                  <option>2</option>
-                  <option>3</option>
+                <select
+                  class="form-select"
+                  [(ngModel)]="employeeobj.departmentId"
+                  name="departmentId"
+                >
+                  <option [ngValue]="null">Select Department</option>
+                  <option [ngValue]="0">HR</option>
+                  <option [ngValue]="1">Finance</option>
+                  <option [ngValue]="2">IT</option>
                 </select>
               </div>
 
-              <div class="col-md-6 mb-3">
-                <label class="form-label">Designation</label>
-                <select class="form-select" [(ngModel)]="employeeobj.designationId " name="designationId">
-                  <option selected>Select Designation</option>
-                  <option>4</option>
-                  <option>5</option>
-                  <option>6</option>
-                </select>
-              </div>
+             <div class="col-md-6 mb-3">
+  <label class="form-label">Designation</label>
+  <select
+    class="form-select"
+    [(ngModel)]="employeeobj.designationId"
+    name="designationId">
+
+    <option [ngValue]="null">Select Designation</option>
+    <option [ngValue]="4">Manager</option>
+    <option [ngValue]="5">Developer</option>
+    <option [ngValue]="6">Tester</option>
+
+  </select>
+</div>
 
               <div class="col-md-6 mb-3">
                 <label class="form-label">Employee Type</label>
-                <select class="form-select" [(ngModel)]="employeeobj.employeeType " name="employeeType">
+                <select
+                  class="form-select"
+                  [(ngModel)]="employeeobj.employeeType"
+                  name="employeeType"
+                >
                   <option selected>Select Type</option>
                   <option>Permanent</option>
                   <option>Contract</option>
@@ -111,12 +146,18 @@
 
               <div class="col-md-6 mb-3">
                 <label class="form-label">Salary</label>
-                <input type="number" [(ngModel)]="employeeobj.salary" class="form-control" name="salary" />
+                <input
+                  type="number"
+                  [(ngModel)]="employeeobj.salary"
+                  class="form-control"
+                  name="salary"
+                />
               </div>
 
-              
               <div class="col-12 d-grid gap-2 mt-2">
-                <button class="btn btn-success" type="button" (click)="saveEmployee()">Save Employee</button>
+                <button class="btn btn-success" type="button" (click)="saveEmployee()">
+                  Save Employee
+                </button>
                 <button type="reset" class="btn btn-secondary">Clear</button>
               </div>
             </div>

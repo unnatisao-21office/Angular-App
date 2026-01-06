@@ -27,4 +27,11 @@
                 
         </table>
     </div>
+    <div class="col-3">
+      <select name="" id="" class="form-select">
+        @for(dept of departmentArray; track $index){
+          <option value="">{{dept.departmentName}}</option>
+        }
+      </select>
+    </div>
 </div>

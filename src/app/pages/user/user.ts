@@ -11,9 +11,10 @@ import { HttpClient } from '@angular/common/http';
 export class User implements OnInit  {
   http = inject(HttpClient);
   userList: any[] =[];
-
+  departmentArray: any[]=[];
   ngOnInit(): void {
     this.getUser();
+    this.getDept();
   }
 
   getUser(){
@@ -21,6 +22,13 @@ export class User implements OnInit  {
       this.userList = res;
     })
   }
+
+  getDept(){
+    this.http.get("https://api.freeprojectapi.com/api/EmployeeApp/GetDepartments").subscribe((res:any)=>{
+      this.departmentArray = res;
+    });
+  }
+
 
  }
 
