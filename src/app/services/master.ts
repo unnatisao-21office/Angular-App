@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-
 import { Employee } from '../model/Employee.model';
 @Injectable({
   providedIn: 'root',
@@ -20,22 +19,32 @@ export class Master {
   }
 
   saveEmployee(emp: Employee) {
-    let payload: any;
     if (emp.employeeId === 0) {
       const { employeeId, ...rest } = emp;
-      payload = rest;
-    } else {
-      payload = emp;
+      return this.http.post<Employee>(
+        'https://api.freeprojectapi.com/api/EmployeeApp/CreateEmployee',
+        rest
+      );
     }
-    return this.http.post<Employee>(
-      'https://api.freeprojectapi.com/api/EmployeeApp/CreateEmployee',
-      payload
+    return this.http.put<Employee>(
+      'https://api.freeprojectapi.com/api/EmployeeApp/UpdateEmployee',
+      emp
     );
   }
-  //will add the put api for updating the pre existing employee data
   getDesignationbtDept(deptId: number) {
     return this.http.get(
       `https://api.freeprojectapi.com/api/EmployeeApp/GetDesignationsByDeptId?deptId=${deptId}`
     );
   }
+  updateEmployee(emp: Employee) {
+    return this.http.put<Employee>(
+      'https://api.freeprojectapi.com/api/EmployeeApp/UpdateEmployee',
+      emp
+    );
+  }
+  onedit(empid: number) {
+    return this.http.get(`https://api.freeprojectapi.com/api/EmployeeApp/${empid}`);
+  }
 }
+
+
