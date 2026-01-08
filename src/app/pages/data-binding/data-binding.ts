@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-data-binding',
   imports: [FormsModule],
+  standalone: true,
   templateUrl: './data-binding.html',
   styleUrl: './data-binding.css',
 })

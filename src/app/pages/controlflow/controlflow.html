@@ -1,10 +1,32 @@
-<div>
+<div class="row">
+    <div class="col-3">
+        <ul class ="list-none bullet-inside p-2">
+            @for(item of cityList; track $index)
+            {
+                <li class="bg-blue-500 text-white p-2 my-1 rounded-lg hover:bg-blue-700 transition-colors duration-300">>{{item}}</li>
+            }
+        </ul>
+    </div>
+</div>
+
+<div class="row">
     <div class="col-3 border-4 ml-4 rounded-lg border-black mt-4 px-3 py-2">
-        <input type="text" placeholder="Enter Name">
+        @if(isTextVisiable()){
+            <input type="text" placeholder="Enter Name">
+        }@else{
+            <p>Text is Hidden</p>
+        }
     </div>
     <div class="col-3 mt-4 ml-4 space-between-2">
-        <button class="btn btn-success me-2">Show</button>
-        <button class="btn btn-danger">Hide</button>
+        <button class="btn btn-success me-2" (click)="showText()">Show</button>
+        <button class="btn btn-danger" (click)="hideText()">Hide</button>
 
+    </div>
+    <div>
+        <div class="col-3">
+            {{isText}}
+            <br>
+            {{isTextVisiable()}}
+        </div>
     </div>
 </div>

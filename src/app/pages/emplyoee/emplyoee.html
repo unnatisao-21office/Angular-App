@@ -1,0 +1,174 @@
+<div class="container mt-4">
+  <div class="row g-3">
+    <div class="col-md-7">
+      <div class="card shadow-sm">
+        <div class="card-header bg-primary text-white">
+          <h5 class="mb-0">Employee List</h5>
+        </div>
+
+        <div class="card-body table-responsive">
+          <table class="table table-bordered table-hover align-middle">
+            <thead class="table-light">
+              <tr>
+                <th>ID</th>
+                <th>Full Name</th>
+                <th>Email</th>
+                <th>Phone</th>
+                <th>Department</th>
+                <th>Salary</th>
+                <th>Actions</th>
+              </tr>
+            </thead>
+            <tbody>
+              @for (item of employeeList () ; track $index){
+              <tr>
+                <td>{{ $index + 1 }}</td>
+                <td>{{ item.fullName }}</td>
+                <td>{{ item.email }}</td>
+                <td>{{ item.phone }}</td>
+                <td>{{ item.departmentId }}</td>
+                <td>{{ item.salary }}</td>
+                <td>
+                  <button class="btn btn-sm btn-warning me-2" (click)="onEdit(item.employeeId)">
+                    Edit
+                  </button>
+                  <button class="btn btn-sm btn-danger">Delete</button>
+                </td>
+              </tr>
+
+              }
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+
+    <div class="col-md-5">
+      <div class="card shadow-sm">
+        <div class="card-header bg-success text-white">
+          <h5 class="mb-0">Add / Update Employee</h5>
+        </div>
+
+        <div class="card-body">
+          <form>
+            <div class="row">
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Full Name</label>
+                <input
+                  type="text"
+                  [(ngModel)]="employeeobj().fullName"
+                  class="form-control"
+                  name="fullName"
+                />
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Email</label>
+                <input
+                  type="email"
+                  [(ngModel)]="employeeobj().email"
+                  class="form-control"
+                  name="email"
+                />
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Phone</label>
+                <input
+                  type="text"
+                  [(ngModel)]="employeeobj().phone"
+                  class="form-control"
+                  name="phone"
+                />
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Gender</label>
+                <select class="form-select" [(ngModel)]="employeeobj().gender" name="gender">
+                  <option selected>Select Gender</option>
+                  <option>Male</option>
+                  <option>Female</option>
+                  <option>Other</option>
+                </select>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Date of Joining</label>
+                <input
+                  type="date"
+                  [(ngModel)]="employeeobj().dateOfJoining"
+                  class="form-control"
+                  name="dateOfJoining"
+                />
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label for="departmentId" class="form-label">Department</label>
+                <select
+                  class="form-select"
+                  [(ngModel)]="employeeobj().departmentId"
+                  name="departmentId"
+                  (change)="getDesignationbtDept()"
+                >
+                  @for(dept of departmentArray(); track $index){
+                  <option [value]="dept.departmentId">{{ dept.departmentName }}</option>
+                  }
+                </select>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label for="designationId" class="form-label">Designation</label>
+                <select
+                  class="form-select"
+                  [(ngModel)]="employeeobj().designationId"
+                  name="designationId"
+                  (change)="getDesignationbtDept()"
+                >
+                  @for(designation of designationArray(); track $index){
+                  <option [value]="designation.designationId">
+                    {{ designation.designationName }}
+                  </option>
+                  }
+                </select>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Employee Type</label>
+                <select
+                  class="form-select"
+                  [(ngModel)]="employeeobj().employeeType"
+                  name="employeeType"
+                >
+                  <option selected>Select Type</option>
+                  <option>Permanent</option>
+                  <option>Contract</option>
+                  <option>Intern</option>
+                </select>
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Salary</label>
+                <input
+                  type="number"
+                  [(ngModel)]="employeeobj().salary"
+                  class="form-control"
+                  name="salary"
+                />
+              </div>
+
+              <div class="col-12 d-grid gap-2 mt-2">
+                <button class="btn btn-success" type="button" (click)="saveEmployee()">
+                  Save Employee
+                </button>
+                 <button class="btn btn-warning" type="button" (click)="updateEmployee()">
+                  Update
+                </button>
+                <button type="reset" class="btn btn-secondary">Clear</button>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
