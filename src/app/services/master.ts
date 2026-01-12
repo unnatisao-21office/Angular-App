@@ -15,41 +15,31 @@ export class Master {
   }
 
   getDept() {
-    return this.http.get<IDepartment[]>(
-      'https://api.freeprojectapi.com/api/EmployeeApp/GetDepartments'
-    );
+    return this.http.get<IDepartment[]>('http://localhost:3000/departments');
   }
   getEmployeeData() {
-    return this.http.get<IEmployee[]>(
-      'https://api.freeprojectapi.com/api/EmployeeApp/GetEmployees'
-    );
+    return this.http.get<IEmployee[]>('http://localhost:3000/employee');
   }
 
   saveEmployee(emp: Employee) {
-    if (emp.employeeId === 0) {
-      const { employeeId, ...rest } = emp;
-      return this.http.post<Employee>(
-        'https://api.freeprojectapi.com/api/EmployeeApp/CreateEmployee',
-        rest
-      );
+    if (emp.id === '') {
+      const { id, ...rest } = emp;
+      return this.http.post<Employee>('http://localhost:3000/employee', rest);
     }
-    return this.http.put<Employee>(
-      'https://api.freeprojectapi.com/api/EmployeeApp/UpdateEmployee',
-      emp
-    );
+    return this.http.put<Employee>(`http://localhost:3000/employee/${emp.id}`, emp);
   }
   getDesignationbtDept(deptId: number) {
     return this.http.get<IDesignation[]>(
-      `https://api.freeprojectapi.com/api/EmployeeApp/GetDesignationsByDeptId?deptId=${deptId}`
+      `http://localhost:3000/designations?departmentId=${deptId}`
     );
   }
   updateEmployee(emp: Employee) {
     return this.http.put<Employee>(
-      'https://api.freeprojectapi.com/api/EmployeeApp/UpdateEmployee',
+      `http://localhost:3000/employee/${emp.id}`,
       emp
     );
   }
-  onedit(empid: number) {
-    return this.http.get<IEmployee>(`https://api.freeprojectapi.com/api/EmployeeApp/${empid}`);
+  onedit(empid: string) {
+    return this.http.get<IEmployee>(`http://localhost:3000/employee/${empid}`);
   }
 }

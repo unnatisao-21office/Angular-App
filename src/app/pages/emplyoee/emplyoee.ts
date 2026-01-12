@@ -18,7 +18,7 @@ export class Emplyoee implements OnInit {
   employeeobj = signal<Employee>(new Employee()); //class object
   departmentArray = signal<IDepartment[]>([]);
   designationArray = signal<IDesignation[]>([]);
-   
+
   ngOnInit(): void {
     this.getEmployeeData();
     this.getDept();
@@ -43,8 +43,7 @@ export class Emplyoee implements OnInit {
     });
   }
 
-  onEdit(empid: number) {
-    
+  onEdit(empid: string) {
     this.master.onedit(empid).subscribe((res: any) => {
       this.employeeobj.set(res);
       this.getDesignationbtDept();

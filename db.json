@@ -1,0 +1,42 @@
+{
+  "employee": [
+    {
+      "id": "f150",
+      "fullName": "gd",
+      "email": "ddd@gmail.com",
+      "phone": "32422555",
+      "gender": "Female",
+      "dateOfJoining": "2026-01-04",
+      "departmentId": "1",
+      "designationId": "1",
+      "employeeType": "Contract",
+      "salary": 1222222
+    }
+  ],
+  "departments": [
+    {
+      "departmentId": 1,
+      "departmentName": "Sales",
+      "id": "f4f7"
+    },
+    {
+      "departmentId": 2,
+      "departmentName": "Marketing",
+      "id": "d118"
+    }
+  ],
+  "designations": [
+    {
+      "designationId": 1,
+      "departmentId": 1,
+      "designationName": "Sale Lead",
+      "id": "83df"
+    },
+    {
+      "designationId": 2,
+      "departmentId": 1,
+      "designationName": "Sale Manager",
+      "id": "f5a1"
+    }
+  ]
+}

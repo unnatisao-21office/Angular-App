@@ -19,19 +19,18 @@ export class UserReactive implements OnInit {
   //employeeobj = signal<Employee>(new Employee()); //class object
 
   employeeForm: FormGroup = new FormGroup({
-    employeeId: new FormControl(0),
-    fullName: new FormControl(""),
-    email: new FormControl(""),
-    phone: new FormControl(""),
-    gender: new FormControl(""),
-    dateOfJoining: new FormControl(""),
+    id: new FormControl(''),
+    //employeeId: new FormControl(0),
+    fullName: new FormControl(''),
+    email: new FormControl(''),
+    phone: new FormControl(''),
+    gender: new FormControl(''),
+    dateOfJoining: new FormControl(''),
     departmentId: new FormControl(0),
     designationId: new FormControl(0),
-    employeeType: new FormControl(""),
-    salary: new FormControl(0)
-
+    employeeType: new FormControl(''),
+    salary: new FormControl(0),
   });
-
 
   departmentArray = signal<IDepartment[]>([]);
   designationArray = signal<IDesignation[]>([]);
@@ -61,8 +60,8 @@ export class UserReactive implements OnInit {
     });
   }
 
-  onEdit(empid: number) {
-     const formValue = this.employeeForm.value;
+  onEdit(empid: string) {
+    const formValue = this.employeeForm.value;
     this.master.onedit(empid).subscribe((res: any) => {
       this.employeeForm.setValue(res);
       this.getDesignationbtDept();
@@ -71,15 +70,15 @@ export class UserReactive implements OnInit {
 
   getDesignationbtDept() {
     //fetch designations based on department
-     const formValue = this.employeeForm.value;
+    const formValue = this.employeeForm.value;
     this.master.getDesignationbtDept(formValue.departmentId).subscribe((res: any) => {
       console.log(res);
       this.designationArray.set(res);
     });
   }
   updateEmployee() {
-     const formValue = this.employeeForm.value;
-    this.master.updateEmployee(formValue).subscribe((res) => {
+    const formValue = this.employeeForm.value;
+    this.master.saveEmployee(formValue).subscribe((res) => {
       alert('Employee Updated Successfully');
       this.getEmployeeData();
     });
