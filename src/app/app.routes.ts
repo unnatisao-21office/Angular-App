@@ -4,6 +4,7 @@ import { DataBinding } from './pages/data-binding/data-binding';
 import { Controlflow } from './pages/controlflow/controlflow';
 import { DynamicCssClass } from './pages/dynamic-css-class/dynamic-css-class';
 import { Emplyoee } from './pages/emplyoee/emplyoee';
+import { UserReactive } from './user-reactive/user-reactive';
 export const routes: Routes = [
     
     {
@@ -21,6 +22,10 @@ export const routes: Routes = [
     {
         path:'dynamic-css',
         component: DynamicCssClass
+    },
+    {
+        path:'user-reactive',
+        component: UserReactive
     },
     {
         path:'employee-page',

@@ -50,13 +50,13 @@
         </div>
 
         <div class="card-body">
-          <form>
+          <form id="employeeForm" [formGroup]="employeeForm">
             <div class="row">
               <div class="col-md-6 mb-3">
                 <label class="form-label">Full Name</label>
                 <input
                   type="text"
-                  [(ngModel)]="employeeobj().fullName"
+                  formControlName="fullName"
                   class="form-control"
                   name="fullName"
                 />
@@ -66,7 +66,7 @@
                 <label class="form-label">Email</label>
                 <input
                   type="email"
-                  [(ngModel)]="employeeobj().email"
+                  formControlName="email"
                   class="form-control"
                   name="email"
                 />
@@ -76,7 +76,7 @@
                 <label class="form-label">Phone</label>
                 <input
                   type="text"
-                  [(ngModel)]="employeeobj().phone"
+                  formControlName="phone"
                   class="form-control"
                   name="phone"
                 />
@@ -84,7 +84,7 @@
 
               <div class="col-md-6 mb-3">
                 <label class="form-label">Gender</label>
-                <select class="form-select" [(ngModel)]="employeeobj().gender" name="gender">
+                <select class="form-select" formControlName="gender" name="gender">
                   <option selected>Select Gender</option>
                   <option>Male</option>
                   <option>Female</option>
@@ -96,7 +96,7 @@
                 <label class="form-label">Date of Joining</label>
                 <input
                   type="date"
-                  [(ngModel)]="employeeobj().dateOfJoining"
+                  formControlName="dateOfJoining"
                   class="form-control"
                   name="dateOfJoining"
                 />
@@ -106,7 +106,7 @@
                 <label for="departmentId" class="form-label">Department</label>
                 <select
                   class="form-select"
-                  [(ngModel)]="employeeobj().departmentId"
+                  formControlName="departmentId"
                   name="departmentId"
                   (change)="getDesignationbtDept()"
                 >
@@ -120,7 +120,7 @@
                 <label for="designationId" class="form-label">Designation</label>
                 <select
                   class="form-select"
-                  [(ngModel)]="employeeobj().designationId"
+                  formControlName="designationId"
                   name="designationId"
                   (change)="getDesignationbtDept()"
                 >
@@ -136,7 +136,7 @@
                 <label class="form-label">Employee Type</label>
                 <select
                   class="form-select"
-                  [(ngModel)]="employeeobj().employeeType"
+                  formControlName="employeeType"
                   name="employeeType"
                 >
                   <option selected>Select Type</option>
@@ -150,7 +150,7 @@
                 <label class="form-label">Salary</label>
                 <input
                   type="number"
-                  [(ngModel)]="employeeobj().salary"
+                  formControlName="salary"
                   class="form-control"
                   name="salary"
                 />

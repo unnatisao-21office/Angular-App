@@ -1,6 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Employee } from '../model/Employee.model';
+import { Employee, IEmployee } from '../model/Employee.model';
+import { IDepartment } from '../model/deparment.model';
+import { IDesignation } from '../model/designation.model';
+import { IUser } from '../model/user.model';
 @Injectable({
   providedIn: 'root',
 })
@@ -8,14 +11,18 @@ export class Master {
   constructor(private http: HttpClient) {}
 
   getUser() {
-    return this.http.get('https://jsonplaceholder.typicode.com/users');
+    return this.http.get<IUser[]>('https://jsonplaceholder.typicode.com/users');
   }
 
   getDept() {
-    return this.http.get('https://api.freeprojectapi.com/api/EmployeeApp/GetDepartments');
+    return this.http.get<IDepartment[]>(
+      'https://api.freeprojectapi.com/api/EmployeeApp/GetDepartments'
+    );
   }
   getEmployeeData() {
-    return this.http.get<Employee>('https://api.freeprojectapi.com/api/EmployeeApp/GetEmployees');
+    return this.http.get<IEmployee[]>(
+      'https://api.freeprojectapi.com/api/EmployeeApp/GetEmployees'
+    );
   }
 
   saveEmployee(emp: Employee) {
@@ -32,7 +39,7 @@ export class Master {
     );
   }
   getDesignationbtDept(deptId: number) {
-    return this.http.get(
+    return this.http.get<IDesignation[]>(
       `https://api.freeprojectapi.com/api/EmployeeApp/GetDesignationsByDeptId?deptId=${deptId}`
     );
   }
@@ -43,8 +50,6 @@ export class Master {
     );
   }
   onedit(empid: number) {
-    return this.http.get(`https://api.freeprojectapi.com/api/EmployeeApp/${empid}`);
+    return this.http.get<IEmployee>(`https://api.freeprojectapi.com/api/EmployeeApp/${empid}`);
   }
 }
-
-
