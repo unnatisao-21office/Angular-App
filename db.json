@@ -1,16 +1,16 @@
 {
   "employee": [
     {
-      "id": "f150",
-      "fullName": "gd",
+      "id": "d33a",
+      "fullName": "sef",
       "email": "ddd@gmail.com",
-      "phone": "32422555",
+      "phone": "2222222",
       "gender": "Female",
-      "dateOfJoining": "2026-01-04",
-      "departmentId": "1",
-      "designationId": "1",
+      "dateOfJoining": "2026-01-28",
+      "departmentId": "2",
+      "designationId": "7",
       "employeeType": "Contract",
-      "salary": 1222222
+      "salary": 1221121
     }
   ],
   "departments": [
@@ -37,6 +37,31 @@
       "departmentId": 1,
       "designationName": "Sale Manager",
       "id": "f5a1"
+    },
+    {
+      "designationId": 3,
+      "departmentId": 2,
+      "designationName": "Facebook Marketing Lead"
+    },
+    {
+      "designationId": 4,
+      "departmentId": 2,
+      "designationName": "Facebook Marketing Employee"
+    },
+    {
+      "designationId": 5,
+      "departmentId": 2,
+      "designationName": "Insta Lead"
+    },
+    {
+      "designationId": 6,
+      "departmentId": 2,
+      "designationName": "Insta Employee"
+    },
+    {
+      "designationId": 7,
+      "departmentId": 2,
+      "designationName": "News Paper"
     }
   ]
 }

@@ -42,4 +42,7 @@ export class Master {
   onedit(empid: string) {
     return this.http.get<IEmployee>(`http://localhost:3000/employee/${empid}`);
   }
+  deleteEmployee(empid: string) {
+    return this.http.delete<void>(`http://localhost:3000/employee/${empid}`);
+  }
 }

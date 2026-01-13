@@ -18,6 +18,7 @@ export class Emplyoee implements OnInit {
   employeeobj = signal<Employee>(new Employee()); //class object
   departmentArray = signal<IDepartment[]>([]);
   designationArray = signal<IDesignation[]>([]);
+  isEditMode = signal<boolean>(false);
 
   ngOnInit(): void {
     this.getEmployeeData();
@@ -34,6 +35,7 @@ export class Emplyoee implements OnInit {
     this.master.saveEmployee(this.employeeobj()).subscribe((res) => {
       alert('Employee Saved Successfully');
       this.getEmployeeData();
+      this.resetForm();
     });
   }
 
@@ -47,6 +49,7 @@ export class Emplyoee implements OnInit {
     this.master.onedit(empid).subscribe((res: any) => {
       this.employeeobj.set(res);
       this.getDesignationbtDept();
+      this.isEditMode.set(true);
     });
   }
 
@@ -62,5 +65,18 @@ export class Emplyoee implements OnInit {
       alert('Employee Updated Successfully');
       this.getEmployeeData();
     });
+  }
+  deleteEmployee(empid: string) {
+    this.master.deleteEmployee(empid).subscribe((res) => {
+      alert('Employee Deleted Successfully');
+      this.getEmployeeData();
+      this.resetForm();
+    });
+  }
+  resetForm() {
+    
+    this.employeeobj.set(new Employee());
+    this.designationArray.set([]);
+    this.isEditMode.set(false);
   }
 }

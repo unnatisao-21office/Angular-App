@@ -16,6 +16,7 @@ import { FormGroup, FormControl } from '@angular/forms';
 export class UserReactive implements OnInit {
   master = inject(Master);
   employeeList = signal<IEmployee[]>([]);
+  isEditMode = signal<boolean>(false);
   //employeeobj = signal<Employee>(new Employee()); //class object
 
   employeeForm: FormGroup = new FormGroup({
@@ -51,6 +52,7 @@ export class UserReactive implements OnInit {
     this.master.saveEmployee(formValue).subscribe((res) => {
       alert('Employee Saved Successfully');
       this.getEmployeeData();
+      this.resetForm();
     });
   }
 
@@ -65,7 +67,11 @@ export class UserReactive implements OnInit {
     this.master.onedit(empid).subscribe((res: any) => {
       this.employeeForm.setValue(res);
       this.getDesignationbtDept();
+      this.isEditMode.set(true);
     });
+  }
+  onDelete(empid: string) { 
+    this.deleteEmployee(empid);
   }
 
   getDesignationbtDept() {
@@ -81,6 +87,32 @@ export class UserReactive implements OnInit {
     this.master.saveEmployee(formValue).subscribe((res) => {
       alert('Employee Updated Successfully');
       this.getEmployeeData();
+      this.resetForm();
     });
   }
-}
+  deleteEmployee(empid :string){
+    this.master.deleteEmployee(empid).subscribe((res) => {
+      alert('Employee Deleted Successfully');
+      this.getEmployeeData();
+      this.resetForm();
+    });
+  }
+
+  resetForm() {
+    this.employeeForm.reset({
+      id: '',
+      fullName: '',
+      email: '',
+      phone: '',
+      gender: '',
+      dateOfJoining: '',
+      departmentId: 0,
+      designationId: 0,
+      employeeType: '',
+      salary: 0,
+    });
+    this.designationArray.set([]);
+    this.isEditMode.set(false);
+  }
+  }
+
