@@ -5,7 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { Master } from '../services/master';
 import { IDepartment } from '../model/deparment.model';
 import { IDesignation } from '../model/designation.model';
-import { FormGroup, FormControl } from '@angular/forms';
+import { FormGroup, FormControl, Validators } from '@angular/forms';
 @Component({
   selector: 'app-user-reactive',
   imports: [ReactiveFormsModule],
@@ -22,9 +22,10 @@ export class UserReactive implements OnInit {
   employeeForm: FormGroup = new FormGroup({
     id: new FormControl(''),
     //employeeId: new FormControl(0),
-    fullName: new FormControl(''),
-    email: new FormControl(''),
-    phone: new FormControl(''),
+    //validators can be added as per requirement
+    fullName: new FormControl('', [Validators.required, Validators.pattern(/^[a-zA-Z\s]*$/)]),
+    email: new FormControl('', [Validators.required, Validators.email]),
+    phone: new FormControl('', [Validators.required, Validators.pattern(/^[0-9]*$/)]),
     gender: new FormControl(''),
     dateOfJoining: new FormControl(''),
     departmentId: new FormControl(0),
@@ -70,7 +71,7 @@ export class UserReactive implements OnInit {
       this.isEditMode.set(true);
     });
   }
-  onDelete(empid: string) { 
+  onDelete(empid: string) {
     this.deleteEmployee(empid);
   }
 
@@ -90,7 +91,7 @@ export class UserReactive implements OnInit {
       this.resetForm();
     });
   }
-  deleteEmployee(empid :string){
+  deleteEmployee(empid: string) {
     this.master.deleteEmployee(empid).subscribe((res) => {
       alert('Employee Deleted Successfully');
       this.getEmployeeData();
@@ -114,5 +115,4 @@ export class UserReactive implements OnInit {
     this.designationArray.set([]);
     this.isEditMode.set(false);
   }
-  }
-
+}

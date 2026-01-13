@@ -32,7 +32,9 @@
                   <button class="btn btn-sm btn-warning me-2" (click)="onEdit(item.id)">
                     Edit
                   </button>
-                  <button class="btn btn-sm btn-danger" (click)="deleteEmployee(item.id)">Delete</button>
+                  <button class="btn btn-sm btn-danger" (click)="deleteEmployee(item.id)">
+                    Delete
+                  </button>
                 </td>
               </tr>
 
@@ -59,7 +61,13 @@
                   [(ngModel)]="employeeobj().fullName"
                   class="form-control"
                   name="fullName"
+                  placeholder="Enter name only"
+                  pattern="^[a-zA-Z\s]*$"
+                  required
                 />
+                @if(!employeeobj().fullName && employeeobj().fullName !== undefined) {
+                <small class="text-danger">Full Name is required</small>
+                }
               </div>
 
               <div class="col-md-6 mb-3">
@@ -69,7 +77,12 @@
                   [(ngModel)]="employeeobj().email"
                   class="form-control"
                   name="email"
+                  placeholder="Enter valid email"
+                  required
                 />
+                @if(!employeeobj().email && employeeobj().email !== undefined) {
+                <small class="text-danger">Email is required</small>
+                }
               </div>
 
               <div class="col-md-6 mb-3">
@@ -79,7 +92,13 @@
                   [(ngModel)]="employeeobj().phone"
                   class="form-control"
                   name="phone"
+                  placeholder="Enter numbers only"
+                  pattern="^[0-9]*$"
+                  required
                 />
+                @if(!employeeobj().phone && employeeobj().phone !== undefined) {
+                <small class="text-danger">Phone is required</small>
+                }
               </div>
 
               <div class="col-md-6 mb-3">
@@ -110,7 +129,7 @@
                   name="departmentId"
                   (change)="getDesignationbtDept()"
                 >
-                <option value="0" disabled selected>Select Department</option>
+                  <option value="0" disabled selected>Select Department</option>
                   @for(dept of departmentArray(); track $index){
                   <option [value]="dept.departmentId">{{ dept.departmentName }}</option>
                   }
@@ -125,7 +144,7 @@
                   name="designationId"
                   (change)="getDesignationbtDept()"
                 >
-                <option value="0" disabled selected>Select Designation</option>
+                  <option value="0" disabled selected>Select Designation</option>
                   @for(designation of designationArray(); track $index){
                   <option [value]="designation.designationId">
                     {{ designation.designationName }}
@@ -167,7 +186,7 @@
                 <button class="btn btn-warning" type="button" (click)="updateEmployee()">
                   Update
                 </button>
-              }
+                }
                 <button type="reset" (click)="resetForm()" class="btn btn-secondary">Clear</button>
               </div>
             </div>

@@ -1,16 +1,16 @@
 {
   "employee": [
     {
-      "id": "d33a",
-      "fullName": "sef",
-      "email": "ddd@gmail.com",
-      "phone": "2222222",
-      "gender": "Female",
-      "dateOfJoining": "2026-01-28",
-      "departmentId": "2",
-      "designationId": "7",
+      "id": "c254",
+      "fullName": "gd",
+      "email": "dd@gmail.com",
+      "phone": "32422555",
+      "gender": "Male",
+      "dateOfJoining": "2026-01-03",
+      "departmentId": "1",
+      "designationId": "1",
       "employeeType": "Contract",
-      "salary": 1221121
+      "salary": 67777
     }
   ],
   "departments": [

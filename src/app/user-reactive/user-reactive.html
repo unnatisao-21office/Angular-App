@@ -59,17 +59,48 @@
                   formControlName="fullName"
                   class="form-control"
                   name="fullName"
+                  placeholder="Enter name only"
                 />
+                @if(employeeForm.get('fullName')?.hasError('required') && employeeForm.get('fullName')?.touched) {
+                <small class="text-danger">Full Name is required</small>
+                }
+                @if(employeeForm.get('fullName')?.hasError('pattern') && employeeForm.get('fullName')?.touched) {
+                <small class="text-danger">Full Name can only contain letters and spaces</small>
+                }
               </div>
 
               <div class="col-md-6 mb-3">
                 <label class="form-label">Email</label>
-                <input type="email" formControlName="email" class="form-control" name="email" />
+                <input
+                  type="email"
+                  formControlName="email"
+                  class="form-control"
+                  name="email"
+                  placeholder="Enter valid email"
+                />
+                @if(employeeForm.get('email')?.hasError('required') && employeeForm.get('email')?.touched) {
+                <small class="text-danger">Email is required</small>
+                }
+                @if(employeeForm.get('email')?.hasError('email') && employeeForm.get('email')?.touched) {
+                <small class="text-danger">Please enter a valid email address</small>
+                }
               </div>
 
               <div class="col-md-6 mb-3">
                 <label class="form-label">Phone</label>
-                <input type="text" formControlName="phone" class="form-control" name="phone" />
+                <input
+                  type="text"
+                  formControlName="phone"
+                  class="form-control"
+                  name="phone"
+                  placeholder="Enter numbers only"
+                />
+                @if(employeeForm.get('phone')?.hasError('required') && employeeForm.get('phone')?.touched) {
+                <small class="text-danger">Phone is required</small>
+                }
+                @if(employeeForm.get('phone')?.hasError('pattern') && employeeForm.get('phone')?.touched) {
+                <small class="text-danger">Phone can only contain numbers</small>
+                }
               </div>
 
               <div class="col-md-6 mb-3">
