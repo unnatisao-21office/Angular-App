@@ -49,8 +49,23 @@ export class UserReactive implements OnInit {
   }
 
   saveEmployee() {
-    if (!this.employeeForm.value.fullName || !this.employeeForm.value.email || !this.employeeForm.value.phone || !this.employeeForm.value.salary || !this.employeeForm.value.departmentId) {
+   
+    if (
+      !this.employeeForm.value.fullName ||
+      !this.employeeForm.value.email ||
+      !this.employeeForm.value.phone ||
+      !this.employeeForm.value.salary ||
+      !this.employeeForm.value.departmentId
+    ) {
       alert('Please fill in Name, Email, Phone Number, Salary, and Department');
+      return;
+    }
+     if (!/^[a-zA-Z]+$/.test(this.employeeForm.value.fullName)) {
+      alert('Full Name must contain letters only, no spaces or numbers');
+      return;
+    }
+    if (this.employeeForm.value.salary < 5000 || this.employeeForm.value.salary > 100000) {
+      alert('Salary must be between 5000 and 100000');
       return;
     }
     const formValue = this.employeeForm.value;
@@ -60,6 +75,8 @@ export class UserReactive implements OnInit {
       this.resetForm();
     });
   }
+
+  
 
   getDept() {
     this.master.getDept().subscribe((res: any) => {
@@ -88,6 +105,24 @@ export class UserReactive implements OnInit {
     });
   }
   updateEmployee() {
+     if (
+      !this.employeeForm.get('fullName')?.value ||
+      !this.employeeForm.get('email')?.value ||
+      !this.employeeForm.get('phone')?.value ||
+      !this.employeeForm.get('salary')?.value ||
+      !this.employeeForm.get('departmentId')?.value
+    ) {
+      alert('Please fill in Name, Email, Phone Number, Salary, and Department');
+      return;
+    }
+    if (!/^[a-zA-Z]+$/.test(this.employeeForm.get('fullName')?.value)) {
+      alert('Full Name must contain letters only, no spaces or numbers');
+      return;
+    }
+     if (this.employeeForm.value.salary < 5000 || this.employeeForm.value.salary > 100000) {
+      alert('Salary must be between 5000 and 100000');
+      return;
+    }
     const formValue = this.employeeForm.value;
     this.master.saveEmployee(formValue).subscribe((res) => {
       alert('Employee Updated Successfully');

@@ -32,8 +32,22 @@ export class Emplyoee implements OnInit {
   }
 
   saveEmployee() {
-    if (!this.employeeobj().fullName || !this.employeeobj().email || !this.employeeobj().phone || !this.employeeobj().salary || !this.employeeobj().departmentId) {
+    if (
+      !this.employeeobj().fullName ||
+      !this.employeeobj().email ||
+      !this.employeeobj().phone ||
+      !this.employeeobj().salary ||
+      !this.employeeobj().departmentId
+    ) {
       alert('Please fill in Name, Email, Phone Number, Salary, and Department');
+      return;
+    }
+    if (!/^[a-zA-Z]+$/.test(this.employeeobj().fullName)) {
+      alert('Full Name must contain letters only, no spaces or numbers');
+      return;
+    }
+    if (this.employeeobj().salary < 5000 || this.employeeobj().salary > 100000) {
+      alert('Salary must be between 5000 and 100000');
       return;
     }
     this.master.saveEmployee(this.employeeobj()).subscribe((res) => {
@@ -65,8 +79,22 @@ export class Emplyoee implements OnInit {
     });
   }
   updateEmployee() {
-    if (!this.employeeobj().fullName || !this.employeeobj().email || !this.employeeobj().phone || !this.employeeobj().salary || !this.employeeobj().departmentId) {
+    if (
+      !this.employeeobj().fullName ||
+      !this.employeeobj().email ||
+      !this.employeeobj().phone ||
+      !this.employeeobj().salary ||
+      !this.employeeobj().departmentId
+    ) {
       alert('Please fill in Name, Email, Phone Number, Salary, and Department');
+      return;
+    }
+    if (!/^[a-zA-Z]+$/.test(this.employeeobj().fullName)) {
+      alert('Full Name must contain letters only, no spaces or numbers');
+      return;
+    }
+    if (this.employeeobj().salary < 5000 || this.employeeobj().salary > 100000) {
+      alert('Salary must be between 5000 and 100000');
       return;
     }
     this.master.updateEmployee(this.employeeobj()).subscribe((res) => {
