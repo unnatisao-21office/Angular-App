@@ -65,7 +65,7 @@
                 />
                 @if(!employeeForm.get('fullName')?.value && employeeForm.get('fullName')?.value !==
                 undefined) {
-                <small class="text-danger">Full Name is required</small>
+                <small class="text-danger"></small>
                 } @if(employeeForm.get('fullName')?.value &&
                 !/^[a-zA-Z]+$/.test(employeeForm.get('fullName')?.value)) {
                 <small class="text-danger"
@@ -86,7 +86,7 @@
                 />
                 @if(!employeeForm.get('email')?.value && employeeForm.get('email')?.value !==
                 undefined) {
-                <small class="text-danger">Email is required</small>
+                <small class="text-danger"></small>
                 }
               </div>
 
@@ -102,7 +102,7 @@
                 />
                 @if(!employeeForm.get('phone')?.value && employeeForm.get('phone')?.value !==
                 undefined) {
-                <small class="text-danger">Phone is required</small>
+                <small class="text-danger"></small>
                 } @if(employeeForm.get('phone')?.hasError('pattern') &&
                 employeeForm.get('phone')?.touched) {
                 <small class="text-danger">Phone can only contain numbers</small>
@@ -110,7 +110,7 @@
               </div>
 
               <div class="col-md-6 mb-3">
-                <label class="form-label">Gender</label>
+                <label class="form-label">Gender </label>
                 <select class="form-select" formControlName="gender" name="gender">
                   <option value="" disabled selected>Select Gender</option>
                   <option>Male</option>
@@ -130,7 +130,9 @@
               </div>
 
               <div class="col-md-6 mb-3">
-                <label for="departmentId" class="form-label">Department <span class="text-danger">*</span></label>
+                <label for="departmentId" class="form-label"
+                  >Department <span class="text-danger">*</span></label
+                >
                 <select
                   class="form-select"
                   formControlName="departmentId"
@@ -145,7 +147,9 @@
               </div>
 
               <div class="col-md-6 mb-3">
-                <label for="designationId" class="form-label">Designation <span class="text-danger">*</span></label>
+                <label for="designationId" class="form-label"
+                  >Designation <span class="text-danger">*</span></label
+                >
                 <select
                   class="form-select"
                   formControlName="designationId"
@@ -163,7 +167,7 @@
               </div>
 
               <div class="col-md-6 mb-3">
-                <label class="form-label">Employee Type </label>
+                <label class="form-label">Employee Type <span class="text-danger">*</span></label>
                 <select class="form-select" formControlName="employeeType" name="employeeType">
                   <option value="" disabled selected>Select Type</option>
                   <option>Permanent</option>
@@ -174,9 +178,17 @@
 
               <div class="col-md-6 mb-3">
                 <label class="form-label">Salary <span class="text-danger">*</span></label>
-                <input type="number" formControlName="salary" class="form-control" name="salary" min="5000" max="100000" required/>
-                 @if(employeeForm.get('salary') && (employeeForm.get('salary').value < 5000 || employeeForm.get('salary').value >
-                100000)) {
+                <input
+                  type="number"
+                  formControlName="salary"
+                  class="form-control"
+                  name="salary"
+                  min="5000"
+                  max="100000"
+                  required
+                />
+                @if(employeeForm.get('salary')?.value && (employeeForm.get('salary')?.value < 5000
+                || employeeForm.get('salary')?.value > 100000)) {
                 <small class="text-danger">Salary must be between 5000 and 100000</small>
                 }
               </div>

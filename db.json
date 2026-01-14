@@ -1,18 +1,5 @@
 {
-  "employee": [
-    {
-      "id": "89a0",
-      "fullName": "gd",
-      "email": "unnatishaw910@gmail.com",
-      "phone": "hhj",
-      "gender": "Female",
-      "dateOfJoining": "",
-      "departmentId": "1",
-      "designationId": "1",
-      "employeeType": "Contract",
-      "salary": 9
-    }
-  ],
+  "employee": [],
   "departments": [
     {
       "departmentId": 1,

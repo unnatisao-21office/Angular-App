@@ -66,7 +66,7 @@
                   required
                 />
                 @if(!employeeobj().fullName && employeeobj().fullName !== undefined) {
-                <small class="text-danger">Full Name is required</small>
+                <small class="text-danger"></small>
                 } @if(employeeobj().fullName && !/^[a-zA-Z]+$/.test(employeeobj().fullName)) {
                 <small class="text-danger"
                   >Full Name must contain letters only, no spaces or numbers</small
@@ -85,7 +85,7 @@
                   required
                 />
                 @if(!employeeobj().email && employeeobj().email !== undefined) {
-                <small class="text-danger">Email is required</small>
+                <small class="text-danger"></small>
                 }
               </div>
 
@@ -101,7 +101,7 @@
                   required
                 />
                 @if(!employeeobj().phone && employeeobj().phone !== undefined) {
-                <small class="text-danger">Phone is required</small>
+                <small class="text-danger"></small>
                 } @if(employeeobj().phone && !/^[0-9]+$/.test(employeeobj().phone)) {
                 <small class="text-danger">Phone can only contain numbers</small>
                 }
@@ -164,7 +164,7 @@
               </div>
 
               <div class="col-md-6 mb-3">
-                <label class="form-label">Employee Type</label>
+                <label class="form-label">Employee Type<span class="text-danger">*</span></label>
                 <select
                   class="form-select"
                   [(ngModel)]="employeeobj().employeeType"
