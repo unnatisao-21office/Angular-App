@@ -49,6 +49,10 @@ export class UserReactive implements OnInit {
   }
 
   saveEmployee() {
+    if (!this.employeeForm.value.fullName || !this.employeeForm.value.email || !this.employeeForm.value.phone || !this.employeeForm.value.salary || !this.employeeForm.value.departmentId) {
+      alert('Please fill in Name, Email, Phone Number, Salary, and Department');
+      return;
+    }
     const formValue = this.employeeForm.value;
     this.master.saveEmployee(formValue).subscribe((res) => {
       alert('Employee Saved Successfully');

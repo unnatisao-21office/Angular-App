@@ -32,6 +32,10 @@ export class Emplyoee implements OnInit {
   }
 
   saveEmployee() {
+    if (!this.employeeobj().fullName || !this.employeeobj().email || !this.employeeobj().phone || !this.employeeobj().salary || !this.employeeobj().departmentId) {
+      alert('Please fill in Name, Email, Phone Number, Salary, and Department');
+      return;
+    }
     this.master.saveEmployee(this.employeeobj()).subscribe((res) => {
       alert('Employee Saved Successfully');
       this.getEmployeeData();
@@ -61,9 +65,14 @@ export class Emplyoee implements OnInit {
     });
   }
   updateEmployee() {
+    if (!this.employeeobj().fullName || !this.employeeobj().email || !this.employeeobj().phone || !this.employeeobj().salary || !this.employeeobj().departmentId) {
+      alert('Please fill in Name, Email, Phone Number, Salary, and Department');
+      return;
+    }
     this.master.updateEmployee(this.employeeobj()).subscribe((res) => {
       alert('Employee Updated Successfully');
       this.getEmployeeData();
+      this.resetForm();
     });
   }
   deleteEmployee(empid: string) {
@@ -74,7 +83,6 @@ export class Emplyoee implements OnInit {
     });
   }
   resetForm() {
-    
     this.employeeobj.set(new Employee());
     this.designationArray.set([]);
     this.isEditMode.set(false);
