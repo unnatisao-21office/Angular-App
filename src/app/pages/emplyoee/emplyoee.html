@@ -62,15 +62,15 @@
                   class="form-control"
                   name="fullName"
                   placeholder="Enter name only"
-                  pattern="^[a-zA-Z]+$"
+                  pattern="^[a-zA-Z\s'-]+$"
                   required
                 />
                 @if(!employeeobj().fullName && employeeobj().fullName !== undefined) {
-                <small class="text-danger"></small>
-                } @if(employeeobj().fullName && !/^[a-zA-Z]+$/.test(employeeobj().fullName)) {
-                <small class="text-danger"
-                  >Full Name must contain letters only, no spaces or numbers</small
-                >
+                <small class="text-danger">Full Name is required</small>
+                } @if(employeeobj().fullName && !/^[a-zA-Z\s'-]+$/.test(employeeobj().fullName)) {
+                <small class="text-danger">Full Name must contain letters only</small>
+                } @if(validationErrors()['fullName']) {
+                <small class="text-danger">{{ validationErrors()['fullName'] }}</small>
                 }
               </div>
 
@@ -83,12 +83,17 @@
                   name="email"
                   placeholder="Enter valid email"
                   required
+                  pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
                 />
                 @if(!employeeobj().email && employeeobj().email !== undefined) {
-                <small class="text-danger"></small>
+                <small class="text-danger">Email is required</small>
+                } @if(employeeobj().email &&
+                !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(employeeobj().email)) {
+                <small class="text-danger">Please enter a valid email address</small>
+                } @if(validationErrors()['email']) {
+                <small class="text-danger">{{ validationErrors()['email'] }}</small>
                 }
               </div>
-
               <div class="col-md-6 mb-3">
                 <label class="form-label">Phone <span class="text-danger">*</span></label>
                 <input
@@ -101,9 +106,11 @@
                   required
                 />
                 @if(!employeeobj().phone && employeeobj().phone !== undefined) {
-                <small class="text-danger"></small>
+                <small class="text-danger">Phone is required</small>
                 } @if(employeeobj().phone && !/^[0-9]+$/.test(employeeobj().phone)) {
                 <small class="text-danger">Phone can only contain numbers</small>
+                } @if(validationErrors()['phone']) {
+                <small class="text-danger">{{ validationErrors()['phone'] }}</small>
                 }
               </div>
 
@@ -142,6 +149,9 @@
                   <option [value]="dept.departmentId">{{ dept.departmentName }}</option>
                   }
                 </select>
+                @if(validationErrors()['departmentId']) {
+                <small class="text-danger">{{ validationErrors()['departmentId'] }}</small>
+                }
               </div>
 
               <div class="col-md-6 mb-3">
@@ -161,6 +171,9 @@
                   </option>
                   }
                 </select>
+                @if(validationErrors()['designationId']) {
+                <small class="text-danger">{{ validationErrors()['designationId'] }}</small>
+                }
               </div>
 
               <div class="col-md-6 mb-3">
@@ -191,11 +204,14 @@
                 @if(employeeobj().salary && (employeeobj().salary < 5000 || employeeobj().salary >
                 100000)) {
                 <small class="text-danger">Salary must be between 5000 and 100000</small>
+                } @if(validationErrors()['salary']) {
+                <small class="text-danger">{{ validationErrors()['salary'] }}</small>
                 }
               </div>
 
               <div class="col-12 d-grid gap-2 mt-2">
                 @if(!isEditMode()) {
+
                 <button class="btn btn-success" type="button" (click)="saveEmployee()">
                   Save Employee
                 </button>

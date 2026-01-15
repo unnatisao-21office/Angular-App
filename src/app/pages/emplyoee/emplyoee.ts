@@ -19,6 +19,7 @@ export class Emplyoee implements OnInit {
   departmentArray = signal<IDepartment[]>([]);
   designationArray = signal<IDesignation[]>([]);
   isEditMode = signal<boolean>(false);
+  validationErrors = signal<{ [key: string]: string }>({});
 
   ngOnInit(): void {
     this.getEmployeeData();
@@ -32,24 +33,49 @@ export class Emplyoee implements OnInit {
   }
 
   saveEmployee() {
-    if (
-      !this.employeeobj().fullName ||
-      !this.employeeobj().email ||
-      !this.employeeobj().phone ||
-      !this.employeeobj().salary ||
-      !this.employeeobj().departmentId
-    ) {
-      alert('Please fill in Name, Email, Phone Number, Salary, and Department');
+    const errors: { [key: string]: string } = {};
+    
+    const trimmedFullName = this.employeeobj().fullName.trim();
+    const trimmedEmail = this.employeeobj().email.trim();
+    this.employeeobj().fullName = trimmedFullName;
+    this.employeeobj().email = trimmedEmail;
+
+    if (!trimmedFullName) {
+      errors['fullName'] = 'Full Name is required';
+    } else if (!/^[a-zA-Z\s'-]+$/.test(trimmedFullName)) {
+      errors['fullName'] = 'Full Name must contain letters only';
+    }
+
+    if (!trimmedEmail) {
+      errors['email'] = 'Email is required';
+    } else if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(trimmedEmail)) {
+      errors['email'] = 'Please enter a valid email address';
+    }
+
+    if (!this.employeeobj().phone) {
+      errors['phone'] = 'Phone is required';
+    }
+
+    if (!this.employeeobj().salary) {
+      errors['salary'] = 'Salary is required';
+    } else if (this.employeeobj().salary < 5000 || this.employeeobj().salary > 100000) {
+      errors['salary'] = 'Salary must be between 5000 and 100000';
+    }
+
+    if (!this.employeeobj().departmentId) {
+      errors['departmentId'] = 'Department is required';
+    }
+
+    if (!this.employeeobj().designationId) {
+      errors['designationId'] = 'Designation is required';
+    }
+
+    this.validationErrors.set(errors);
+
+    if (Object.keys(errors).length > 0) {
       return;
     }
-    if (!/^[a-zA-Z]+$/.test(this.employeeobj().fullName)) {
-      alert('Full Name must contain letters only, no spaces or numbers');
-      return;
-    }
-    if (this.employeeobj().salary < 5000 || this.employeeobj().salary > 100000) {
-      alert('Salary must be between 5000 and 100000');
-      return;
-    }
+
     this.master.saveEmployee(this.employeeobj()).subscribe((res) => {
       alert('Employee Saved Successfully');
       this.getEmployeeData();
@@ -79,24 +105,49 @@ export class Emplyoee implements OnInit {
     });
   }
   updateEmployee() {
-    if (
-      !this.employeeobj().fullName ||
-      !this.employeeobj().email ||
-      !this.employeeobj().phone ||
-      !this.employeeobj().salary ||
-      !this.employeeobj().departmentId
-    ) {
-      alert('Please fill in Name, Email, Phone Number, Salary, and Department');
+    const errors: { [key: string]: string } = {};
+
+    const trimmedFullName = this.employeeobj().fullName.trim();
+    const trimmedEmail = this.employeeobj().email.trim();
+    this.employeeobj().fullName = trimmedFullName;
+    this.employeeobj().email = trimmedEmail;
+
+    if (!trimmedFullName) {
+      errors['fullName'] = 'Full Name is required';
+    } else if (!/^[a-zA-Z\s'-]+$/.test(trimmedFullName)) {
+      errors['fullName'] = 'Full Name must contain letters only';
+    }
+
+    if (!trimmedEmail) {
+      errors['email'] = 'Email is required';
+    } else if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(trimmedEmail)) {
+      errors['email'] = 'Please enter a valid email address';
+    }
+
+    if (!this.employeeobj().phone) {
+      errors['phone'] = 'Phone is required';
+    }
+
+    if (!this.employeeobj().salary) {
+      errors['salary'] = 'Salary is required';
+    } else if (this.employeeobj().salary < 5000 || this.employeeobj().salary > 100000) {
+      errors['salary'] = 'Salary must be between 5000 and 100000';
+    }
+
+    if (!this.employeeobj().departmentId) {
+      errors['departmentId'] = 'Department is required';
+    }
+
+    if (!this.employeeobj().designationId) {
+      errors['designationId'] = 'Designation is required';
+    }
+
+    this.validationErrors.set(errors);
+
+    if (Object.keys(errors).length > 0) {
       return;
     }
-    if (!/^[a-zA-Z]+$/.test(this.employeeobj().fullName)) {
-      alert('Full Name must contain letters only, no spaces or numbers');
-      return;
-    }
-    if (this.employeeobj().salary < 5000 || this.employeeobj().salary > 100000) {
-      alert('Salary must be between 5000 and 100000');
-      return;
-    }
+
     this.master.updateEmployee(this.employeeobj()).subscribe((res) => {
       alert('Employee Updated Successfully');
       this.getEmployeeData();
@@ -114,5 +165,6 @@ export class Emplyoee implements OnInit {
     this.employeeobj.set(new Employee());
     this.designationArray.set([]);
     this.isEditMode.set(false);
+    this.validationErrors.set({});
   }
 }
