@@ -65,13 +65,16 @@
                   pattern="^[a-zA-Z\s'-]+$"
                   required
                 />
-                @if(!employeeobj().fullName && employeeobj().fullName !== undefined) {
+                <!-- @if(!employeeobj().fullName && employeeobj().fullName !== undefined) {
                 <small class="text-danger">Full Name is required</small>
-                } @if(employeeobj().fullName && !/^[a-zA-Z\s'-]+$/.test(employeeobj().fullName)) {
+                } @else if(employeeobj().fullName &&
+                !/^[a-zA-Z\s'-]+$/.test(employeeobj().fullName)) {
                 <small class="text-danger">Full Name must contain letters only</small>
-                } @if(validationErrors()['fullName']) {
+                } @else if(validationErrors()['fullName']) {
                 <small class="text-danger">{{ validationErrors()['fullName'] }}</small>
-                }
+                } -->
+                @if(validationErrors()['fullName']) {
+                <small class="text-danger">{{ validationErrors()['fullName'] }}</small>}
               </div>
 
               <div class="col-md-6 mb-3">
@@ -83,14 +86,17 @@
                   name="email"
                   placeholder="Enter valid email"
                   required
-                  pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$"
+                  pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"
                 />
-                @if(!employeeobj().email && employeeobj().email !== undefined) {
+                <!-- @if(!employeeobj().email && employeeobj().email !== undefined) {
                 <small class="text-danger">Email is required</small>
                 } @if(employeeobj().email &&
-                !/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(employeeobj().email)) {
+                !/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(employeeobj().email)) {
                 <small class="text-danger">Please enter a valid email address</small>
                 } @if(validationErrors()['email']) {
+                <small class="text-danger">{{ validationErrors()['email'] }}</small>
+                } -->
+                @if(validationErrors()['email']) {
                 <small class="text-danger">{{ validationErrors()['email'] }}</small>
                 }
               </div>
