@@ -18,7 +18,9 @@ export class Emplyoee implements OnInit {
   employeeobj = signal<Employee>(new Employee()); //class object
   departmentArray = signal<IDepartment[]>([]);
   designationArray = signal<IDesignation[]>([]);
-   
+  isEditMode = signal<boolean>(false);
+  validationErrors = signal<{ [key: string]: string }>({});
+
   ngOnInit(): void {
     this.getEmployeeData();
     this.getDept();
@@ -31,9 +33,55 @@ export class Emplyoee implements OnInit {
   }
 
   saveEmployee() {
+    const errors: { [key: string]: string } = {};
+    
+    const trimmedFullName = this.employeeobj().fullName.trim();
+    const trimmedEmail = this.employeeobj().email.trim();
+    this.employeeobj().fullName = trimmedFullName;
+    this.employeeobj().email = trimmedEmail;
+
+    if (!trimmedFullName) {
+      errors['fullName'] = 'Full Name is required';
+    } else if (!/^[a-zA-Z\s'-]+$/.test(trimmedFullName)) {
+      errors['fullName'] = 'Full Name must contain letters only';
+    }
+
+    if (!trimmedEmail) {
+      errors['email'] = 'Email is required';
+    } else if (!/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(trimmedEmail)) {
+      errors['email'] = 'Please enter a valid email address';
+    }
+
+    if (!this.employeeobj().phone) {
+      errors['phone'] = 'Phone is required';
+    }else if (!/^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$/.test(this.employeeobj().phone)) {
+      errors['phone'] = 'Please enter a valid phone number';
+    }
+
+    if (!this.employeeobj().salary) {
+      errors['salary'] = 'Salary is required';
+    } else if (this.employeeobj().salary < 5000 || this.employeeobj().salary > 100000) {
+      errors['salary'] = 'Salary must be between 5000 and 100000';
+    }
+
+    if (!this.employeeobj().departmentId) {
+      errors['departmentId'] = 'Department is required';
+    }
+
+    if (!this.employeeobj().designationId) {
+      errors['designationId'] = 'Designation is required';
+    }
+
+    this.validationErrors.set(errors);
+
+    if (Object.keys(errors).length > 0) {
+      return;
+    }
+
     this.master.saveEmployee(this.employeeobj()).subscribe((res) => {
       alert('Employee Saved Successfully');
       this.getEmployeeData();
+      this.resetForm();
     });
   }
 
@@ -43,11 +91,11 @@ export class Emplyoee implements OnInit {
     });
   }
 
-  onEdit(empid: number) {
-    
+  onEdit(empid: string) {
     this.master.onedit(empid).subscribe((res: any) => {
       this.employeeobj.set(res);
       this.getDesignationbtDept();
+      this.isEditMode.set(true);
     });
   }
 
@@ -59,9 +107,68 @@ export class Emplyoee implements OnInit {
     });
   }
   updateEmployee() {
+    const errors: { [key: string]: string } = {};
+
+    const trimmedFullName = this.employeeobj().fullName.trim();
+    const trimmedEmail = this.employeeobj().email.trim();
+    this.employeeobj().fullName = trimmedFullName;
+    this.employeeobj().email = trimmedEmail;
+
+    if (!trimmedFullName) {
+      errors['fullName'] = 'Full Name is required';
+    } else if (!/^[a-zA-Z\s'-]+$/.test(trimmedFullName)) {
+      errors['fullName'] = 'Full Name must contain letters only';
+    }
+
+    if (!trimmedEmail) {
+      errors['email'] = 'Email is required';
+    } else if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(trimmedEmail)) {
+      errors['email'] = 'Please enter a valid email address';
+    }
+
+    if (!this.employeeobj().phone) {
+      errors['phone'] = 'Phone is required';
+    }else if (!/^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$/.test(this.employeeobj().phone)) {
+      errors['phone'] = 'Please enter a valid phone number';
+    }
+
+    if (!this.employeeobj().salary) {
+      errors['salary'] = 'Salary is required';
+    } else if (this.employeeobj().salary < 5000 || this.employeeobj().salary > 100000) {
+      errors['salary'] = 'Salary must be between 5000 and 100000';
+    }
+
+    if (!this.employeeobj().departmentId) {
+      errors['departmentId'] = 'Department is required';
+    }
+
+    if (!this.employeeobj().designationId) {
+      errors['designationId'] = 'Designation is required';
+    }
+
+    this.validationErrors.set(errors);
+
+    if (Object.keys(errors).length > 0) {
+      return;
+    }
+
     this.master.updateEmployee(this.employeeobj()).subscribe((res) => {
       alert('Employee Updated Successfully');
       this.getEmployeeData();
+      this.resetForm();
     });
+  }
+  deleteEmployee(empid: string) {
+    this.master.deleteEmployee(empid).subscribe((res) => {
+      alert('Employee Deleted Successfully');
+      this.getEmployeeData();
+      this.resetForm();
+    });
+  }
+  resetForm() {
+    this.employeeobj.set(new Employee());
+    this.designationArray.set([]);
+    this.isEditMode.set(false);
+    this.validationErrors.set({});
   }
 }

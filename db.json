@@ -1,0 +1,72 @@
+{
+  "employee": [
+    {
+      "id": "553f",
+      "fullName": "l",
+      "email": "pp@gmail.com",
+      "phone": "3242255",
+      "gender": "Male",
+      "dateOfJoining": "2026-01-16",
+      "departmentId": "2",
+      "designationId": "3",
+      "employeeType": "Contract",
+      "salary": 9000
+    }
+  ],
+  "departments": [
+    {
+      "departmentId": 1,
+      "departmentName": "Sales",
+      "id": "f4f7"
+    },
+    {
+      "departmentId": 2,
+      "departmentName": "Marketing",
+      "id": "d118"
+    }
+  ],
+  "designations": [
+    {
+      "designationId": 1,
+      "departmentId": 1,
+      "designationName": "Sale Lead",
+      "id": "83df"
+    },
+    {
+      "designationId": 2,
+      "departmentId": 1,
+      "designationName": "Sale Manager",
+      "id": "f5a1"
+    },
+    {
+      "designationId": 3,
+      "departmentId": 2,
+      "designationName": "Facebook Marketing Lead",
+      "id": "10a2"
+    },
+    {
+      "designationId": 4,
+      "departmentId": 2,
+      "designationName": "Facebook Marketing Employee",
+      "id": "1f4f"
+    },
+    {
+      "designationId": 5,
+      "departmentId": 2,
+      "designationName": "Insta Lead",
+      "id": "a84f"
+    },
+    {
+      "designationId": 6,
+      "departmentId": 2,
+      "designationName": "Insta Employee",
+      "id": "9f3a"
+    },
+    {
+      "designationId": 7,
+      "departmentId": 2,
+      "designationName": "News Paper",
+      "id": "4026"
+    }
+  ]
+}

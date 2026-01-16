@@ -32,9 +32,7 @@
                   <button class="btn btn-sm btn-warning me-2" (click)="onEdit(item.id)">
                     Edit
                   </button>
-                  <button class="btn btn-sm btn-danger" (click)="deleteEmployee(item.id)">
-                    Delete
-                  </button>
+                  <button class="btn btn-sm btn-danger" (click)="onDelete(item.id)">Delete</button>
                 </td>
               </tr>
 
@@ -52,59 +50,68 @@
         </div>
 
         <div class="card-body">
-          <form>
+          <form id="employeeForm" [formGroup]="employeeForm">
             <div class="row">
               <div class="col-md-6 mb-3">
-                <label class="form-label">Full Name <span class="text-danger">*</span></label>
+                <label class="form-label">Full Name<span class="text-danger">*</span></label>
                 <input
                   type="text"
-                  [(ngModel)]="employeeobj().fullName"
+                  formControlName="fullName"
                   class="form-control"
                   name="fullName"
                   placeholder="Enter name only"
-                  pattern="^[a-zA-Z\s'-]+$"
+                  pattern="^[a-zA-Z]+$"
                   required
                 />
-               
-                @if(validationErrors()['fullName']) {
-                <small class="text-danger">{{ validationErrors()['fullName'] }}</small>}
+                @if(!employeeForm.get('fullName')?.value && employeeForm.get('fullName')?.value !==
+                undefined) {
+                <small class="text-danger"></small>
+                } @if(employeeForm.get('fullName')?.value &&
+                !/^[a-zA-Z]+$/.test(employeeForm.get('fullName')?.value)) {
+                <small class="text-danger"
+                  >Full Name must contain letters only, no spaces or numbers</small
+                >
+                }
               </div>
 
               <div class="col-md-6 mb-3">
                 <label class="form-label">Email <span class="text-danger">*</span></label>
                 <input
                   type="email"
-                  [(ngModel)]="employeeobj().email"
+                  formControlName="email"
                   class="form-control"
                   name="email"
                   placeholder="Enter valid email"
                   required
-                  pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"
                 />
-              
-                @if(validationErrors()['email']) {
-                <small class="text-danger">{{ validationErrors()['email'] }}</small>
-                }
-              </div>
-              <div class="col-md-6 mb-3">
-                <label class="form-label">Phone <span class="text-danger">*</span></label>
-                <input
-                  type="text"
-                  [(ngModel)]="employeeobj().phone"
-                  class="form-control"
-                  name="phone"
-                  placeholder="Enter numbers only"
-                  pattern="^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$"
-                  required
-                />
-                 @if(validationErrors()['phone']) {
-                <small class="text-danger">{{ validationErrors()['phone'] }}</small>
+                @if(!employeeForm.get('email')?.value && employeeForm.get('email')?.value !==
+                undefined) {
+                <small class="text-danger"></small>
                 }
               </div>
 
               <div class="col-md-6 mb-3">
-                <label class="form-label">Gender</label>
-                <select class="form-select" [(ngModel)]="employeeobj().gender" name="gender">
+                <label class="form-label">Phone <span class="text-danger">*</span></label>
+                <input
+                  type="text"
+                  formControlName="phone"
+                  class="form-control"
+                  name="phone"
+                  placeholder="Enter numbers only"
+                  required
+                />
+                @if(!employeeForm.get('phone')?.value && employeeForm.get('phone')?.value !==
+                undefined) {
+                <small class="text-danger"></small>
+                } @if(employeeForm.get('phone')?.hasError('pattern') &&
+                employeeForm.get('phone')?.touched) {
+                <small class="text-danger">Phone can only contain numbers</small>
+                }
+              </div>
+
+              <div class="col-md-6 mb-3">
+                <label class="form-label">Gender </label>
+                <select class="form-select" formControlName="gender" name="gender">
                   <option value="" disabled selected>Select Gender</option>
                   <option>Male</option>
                   <option>Female</option>
@@ -116,7 +123,7 @@
                 <label class="form-label">Date of Joining</label>
                 <input
                   type="date"
-                  [(ngModel)]="employeeobj().dateOfJoining"
+                  formControlName="dateOfJoining"
                   class="form-control"
                   name="dateOfJoining"
                 />
@@ -124,11 +131,11 @@
 
               <div class="col-md-6 mb-3">
                 <label for="departmentId" class="form-label"
-                  >Department<span class="text-danger">*</span></label
+                  >Department <span class="text-danger">*</span></label
                 >
                 <select
                   class="form-select"
-                  [(ngModel)]="employeeobj().departmentId"
+                  formControlName="departmentId"
                   name="departmentId"
                   (change)="getDesignationbtDept()"
                 >
@@ -137,40 +144,31 @@
                   <option [value]="dept.departmentId">{{ dept.departmentName }}</option>
                   }
                 </select>
-                @if(validationErrors()['departmentId']) {
-                <small class="text-danger">{{ validationErrors()['departmentId'] }}</small>
-                }
               </div>
 
               <div class="col-md-6 mb-3">
                 <label for="designationId" class="form-label"
-                  >Designation<span class="text-danger">*</span></label
+                  >Designation <span class="text-danger">*</span></label
                 >
                 <select
                   class="form-select"
-                  [(ngModel)]="employeeobj().designationId"
+                  formControlName="designationId"
                   name="designationId"
                   (change)="getDesignationbtDept()"
                 >
                   <option value="0" disabled selected>Select Designation</option>
                   @for(designation of designationArray(); track $index){
+
                   <option [value]="designation.designationId">
                     {{ designation.designationName }}
                   </option>
                   }
                 </select>
-                @if(validationErrors()['designationId']) {
-                <small class="text-danger">{{ validationErrors()['designationId'] }}</small>
-                }
               </div>
 
               <div class="col-md-6 mb-3">
-                <label class="form-label">Employee Type<span class="text-danger">*</span></label>
-                <select
-                  class="form-select"
-                  [(ngModel)]="employeeobj().employeeType"
-                  name="employeeType"
-                >
+                <label class="form-label">Employee Type <span class="text-danger">*</span></label>
+                <select class="form-select" formControlName="employeeType" name="employeeType">
                   <option value="" disabled selected>Select Type</option>
                   <option>Permanent</option>
                   <option>Contract</option>
@@ -179,27 +177,24 @@
               </div>
 
               <div class="col-md-6 mb-3">
-                <label class="form-label">Salary<span class="text-danger">*</span></label>
+                <label class="form-label">Salary <span class="text-danger">*</span></label>
                 <input
                   type="number"
-                  [(ngModel)]="employeeobj().salary"
+                  formControlName="salary"
                   class="form-control"
                   name="salary"
                   min="5000"
                   max="100000"
                   required
                 />
-                @if(employeeobj().salary && (employeeobj().salary < 5000 || employeeobj().salary >
-                100000)) {
+                @if(employeeForm.get('salary')?.value && (employeeForm.get('salary')?.value < 5000
+                || employeeForm.get('salary')?.value > 100000)) {
                 <small class="text-danger">Salary must be between 5000 and 100000</small>
-                } @if(validationErrors()['salary']) {
-                <small class="text-danger">{{ validationErrors()['salary'] }}</small>
                 }
               </div>
 
               <div class="col-12 d-grid gap-2 mt-2">
                 @if(!isEditMode()) {
-
                 <button class="btn btn-success" type="button" (click)="saveEmployee()">
                   Save Employee
                 </button>
@@ -208,7 +203,7 @@
                   Update
                 </button>
                 }
-                <button type="reset" (click)="resetForm()" class="btn btn-secondary">Clear</button>
+                <button type="button" class="btn btn-secondary" (click)="resetForm()">Clear</button>
               </div>
             </div>
           </form>

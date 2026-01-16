@@ -1,5 +1,6 @@
-export interface IEmployee{
-  employeeId: number;
+export interface IEmployee {
+  id: string;
+  //employeeId: number;
   fullName: string;
   email: string;
   phone: string;
@@ -8,11 +9,12 @@ export interface IEmployee{
   departmentId: number;
   designationId: number;
   employeeType: string;
-  salary: number
+  salary: number;
 }
 
-export class Employee{
- employeeId: number;
+export class Employee {
+  id: string;
+  //employeeId: number;
   fullName: string;
   email: string;
   phone: string;
@@ -23,8 +25,8 @@ export class Employee{
   employeeType: string;
   salary: number;
 
-  constructor(){
-    this.employeeId = 0;
+  constructor() {
+   // this.employeeId = 0;
     this.fullName = '';
     this.email = '';
     this.phone = '';
@@ -34,5 +36,6 @@ export class Employee{
     this.designationId = 0;
     this.employeeType = '';
     this.salary = 0;
+    this.id = '';
   }
 }
