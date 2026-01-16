@@ -54,6 +54,8 @@ export class Emplyoee implements OnInit {
 
     if (!this.employeeobj().phone) {
       errors['phone'] = 'Phone is required';
+    }else if (!/^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$/.test(this.employeeobj().phone)) {
+      errors['phone'] = 'Please enter a valid phone number';
     }
 
     if (!this.employeeobj().salary) {
@@ -126,6 +128,8 @@ export class Emplyoee implements OnInit {
 
     if (!this.employeeobj().phone) {
       errors['phone'] = 'Phone is required';
+    }else if (!/^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$/.test(this.employeeobj().phone)) {
+      errors['phone'] = 'Please enter a valid phone number';
     }
 
     if (!this.employeeobj().salary) {

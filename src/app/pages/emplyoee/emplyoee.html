@@ -65,14 +65,7 @@
                   pattern="^[a-zA-Z\s'-]+$"
                   required
                 />
-                <!-- @if(!employeeobj().fullName && employeeobj().fullName !== undefined) {
-                <small class="text-danger">Full Name is required</small>
-                } @else if(employeeobj().fullName &&
-                !/^[a-zA-Z\s'-]+$/.test(employeeobj().fullName)) {
-                <small class="text-danger">Full Name must contain letters only</small>
-                } @else if(validationErrors()['fullName']) {
-                <small class="text-danger">{{ validationErrors()['fullName'] }}</small>
-                } -->
+               
                 @if(validationErrors()['fullName']) {
                 <small class="text-danger">{{ validationErrors()['fullName'] }}</small>}
               </div>
@@ -88,14 +81,7 @@
                   required
                   pattern="^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$"
                 />
-                <!-- @if(!employeeobj().email && employeeobj().email !== undefined) {
-                <small class="text-danger">Email is required</small>
-                } @if(employeeobj().email &&
-                !/^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/.test(employeeobj().email)) {
-                <small class="text-danger">Please enter a valid email address</small>
-                } @if(validationErrors()['email']) {
-                <small class="text-danger">{{ validationErrors()['email'] }}</small>
-                } -->
+              
                 @if(validationErrors()['email']) {
                 <small class="text-danger">{{ validationErrors()['email'] }}</small>
                 }
@@ -108,14 +94,10 @@
                   class="form-control"
                   name="phone"
                   placeholder="Enter numbers only"
-                  pattern="^[0-9]*$"
+                  pattern="^(?:(?:\+|0{0,2})91(\s*[\-]\s*)?|[0]?)?[789]\d{9}$"
                   required
                 />
-                @if(!employeeobj().phone && employeeobj().phone !== undefined) {
-                <small class="text-danger">Phone is required</small>
-                } @if(employeeobj().phone && !/^[0-9]+$/.test(employeeobj().phone)) {
-                <small class="text-danger">Phone can only contain numbers</small>
-                } @if(validationErrors()['phone']) {
+                 @if(validationErrors()['phone']) {
                 <small class="text-danger">{{ validationErrors()['phone'] }}</small>
                 }
               </div>

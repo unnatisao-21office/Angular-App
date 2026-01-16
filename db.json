@@ -11,18 +11,6 @@
       "designationId": "3",
       "employeeType": "Contract",
       "salary": 9000
-    },
-    {
-      "id": "c21c",
-      "fullName": "unnati sao",
-      "email": "unnatishaw910@gmail.com",
-      "phone": "32422555",
-      "gender": "Female",
-      "dateOfJoining": "2026-01-16",
-      "departmentId": "1",
-      "designationId": "1",
-      "employeeType": "Contract",
-      "salary": 33333
     }
   ],
   "departments": [
